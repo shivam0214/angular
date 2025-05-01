@@ -87,3 +87,46 @@
     font-size: 1rem;
   }
 }
+.badge {
+  display: inline-block;
+  background-color: #ff0000;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 12px;
+  margin-top: 5px;
+}
+span.badge {
+  position: relative;
+  bottom: 165px;
+  left: 41px;
+}
+.category-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.category-item {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.category-item:hover {
+  transform: scale(1.1);
+}
+
+.category-item.selected {
+  border: 2px solid #007bff;
+  border-radius: 8px;
+}
+
+.category-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}

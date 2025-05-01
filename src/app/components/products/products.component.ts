@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private toastr: ToastrService 
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -53,5 +53,22 @@ export class ProductsComponent implements OnInit {
       image: product.thumbnail
     });
     this.toastr.success(`${product.title} has been added to the cart!`, 'Success'); // Toastr notification
+  }
+  getCategoryImage(category: string): string {
+    const categoryImages: { [key: string]: string } = {
+      Electronics: 'path/to/electronics.jpg',
+      Clothing: 'path/to/clothing.jpg',
+      'Home Appliances': 'path/to/home-appliances.jpg',
+      Books: 'path/to/books.jpg',
+    };
+    return categoryImages[category] || 'path/to/default.jpg';
+  }
+  filterByCategory(category: string) {
+    this.selectedCategory = this.selectedCategory === category ? '' : category;
+    this.filterProducts();
+  }
+
+  getProductCountForCategory(category: string): number {
+    return this.products.filter(product => product.category === category).length;
   }
 }
