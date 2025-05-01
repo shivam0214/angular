@@ -1,0 +1,57 @@
+import { Component, OnInit } from '@angular/core';
+import { ProductService, Product } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
+import { ToastrService } from 'ngx-toastr';
+@Component({
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.scss'],
+  standalone: false
+})
+export class ProductsComponent implements OnInit {
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
+  categories: string[] = [];
+  selectedCategory: string = '';
+  selectedRating: number = 0;
+
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService,
+    private toastr: ToastrService 
+  ) {}
+
+  ngOnInit(): void {
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
+    this.productService.getProducts().subscribe((data) => {
+      this.products = data;
+      this.filteredProducts = data;
+
+      // Extract unique categories
+      this.categories = [...new Set(data.map((product) => product.category))];
+    });
+  }
+
+  filterProducts(): void {
+    this.filteredProducts = this.products.filter((product) => {
+      const matchesCategory =
+        !this.selectedCategory || product.category === this.selectedCategory;
+      const matchesRating = product.rating >= this.selectedRating;
+      return matchesCategory && matchesRating;
+    });
+  }
+
+  addToCart(product: Product): void {
+    this.cartService.addToCart({
+      id: product.id,
+      name: product.title,
+      price: product.price,
+      quantity: 1,
+      image: product.thumbnail
+    });
+    this.toastr.success(`${product.title} has been added to the cart!`, 'Success'); // Toastr notification
+  }
+}

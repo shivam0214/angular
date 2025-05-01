@@ -1,0 +1,77 @@
+/* filepath: d:\sts java\angular\demo2\src\app\admin\pages\list-products\list-products.component.scss */
+.list-products {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      background-color: #00bcd4;
+      color: white;
+
+      th {
+        padding: 1rem;
+        text-align: left;
+        font-size: 1rem;
+      }
+    }
+
+    tbody {
+      tr {
+        &:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+
+        &:hover {
+          background-color: #e0f7fa;
+        }
+      }
+
+      td {
+        padding: 1rem;
+        font-size: 0.9rem;
+        color: #555;
+
+        button {
+          padding: 0.5rem 1rem;
+          margin-right: 0.5rem;
+          border: none;
+          border-radius: 4px;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:first-child {
+            background-color: #ff9800;
+            color: white;
+
+            &:hover {
+              background-color: #e68900;
+            }
+          }
+
+          &:last-child {
+            background-color: #f44336;
+            color: white;
+
+            &:hover {
+              background-color: #d32f2f;
+            }
+          }
+        }
+      }
+    }
+  }
+}

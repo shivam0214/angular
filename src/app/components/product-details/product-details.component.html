@@ -1,0 +1,18 @@
+<div class="product-details" *ngIf="!isLoading; else loading">
+  <h2>{{ product?.title }}</h2>
+  <img [src]="product?.thumbnail" [alt]="product?.title" />
+  <p><strong>Category:</strong> {{ product?.category }}</p>
+  <p><strong>Price:</strong> ${{ product?.price }}</p>
+  <p><strong>Description:</strong> {{ product?.description }}</p>
+  <p><strong>Rating:</strong> {{ product?.rating }} / 5</p>
+  <p><strong>Stock:</strong> {{ product?.stock }}</p>
+  <button (click)="product && addToCart(product)">Add to Cart</button>
+<button routerLink="/list-products">Back to Products</button>
+</div>
+
+<ng-template #loading>
+  <p>Loading product details...</p>
+</ng-template>
+
+
+

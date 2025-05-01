@@ -1,0 +1,42 @@
+<div class="product-list">
+  <h2>Product List</h2>
+
+  <!-- Filter Section -->
+  <div class="filters">
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter" [(ngModel)]="selectedCategory" (change)="filterProducts()">
+      <option value="">All Categories</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+
+    <label for="ratingFilter">Filter by Minimum Rating:</label>
+    <input
+      type="number"
+      id="ratingFilter"
+      [(ngModel)]="selectedRating"
+      (input)="filterProducts()"
+      min="0"
+      max="5"
+      step="0.1"
+      placeholder="Enter minimum rating"
+    />
+  </div>
+
+  <!-- Product Grid -->
+  <div *ngIf="filteredProducts.length > 0; else noProducts" class="product-grid">
+    <div class="product" *ngFor="let product of filteredProducts">
+      <img [src]="product.thumbnail" [alt]="product.title" class="product-thumbnail" />
+      <h3>{{ product.title }}</h3>
+      <p><strong>Category:</strong> {{ product.category }}</p>
+      <p><strong>Price:</strong> ${{ product.price }}</p>
+      <p><strong>Rating:</strong> {{ product.rating }} / 5</p>
+      <p><strong>Stock:</strong> {{ product.stock }}</p>
+      <button (click)="addToCart(product)">Add to Cart</button>
+      <button [routerLink]="['/product-details', product.id]">Show Details</button>
+    </div>
+  </div>
+
+  <ng-template #noProducts>
+    <p>No products available.</p>
+  </ng-template>
+</div>
