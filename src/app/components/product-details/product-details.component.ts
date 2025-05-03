@@ -28,7 +28,7 @@ export class ProductDetailsComponent implements OnInit {
 
     if (productId) {
       this.productService.getProducts().subscribe((products) => {
-
+        this.product = products.find((p) => p.id === +productId) || null;
         this.product = products.find((p) => p.id.toString() === productId) || null;
 
         this.isLoading = false; // Set loading to false after data is fetched

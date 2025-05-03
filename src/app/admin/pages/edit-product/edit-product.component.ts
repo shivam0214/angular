@@ -22,7 +22,8 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productId = +this.route.snapshot.paramMap.get('id')!;
-    
+    console.log(this.productId)
+
     this.productService.getProducts().subscribe((products) => {
       const product = products.find((p) => p.id === this.productId);
       if (product) {

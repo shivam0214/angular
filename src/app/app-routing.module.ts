@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
+ // { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
   { path: '**', component: HomeComponent },
   /* { path: 'admin/add-product', component: AddProductComponent },
   { path: 'admin/list-products', component: ListProductsComponent }, */

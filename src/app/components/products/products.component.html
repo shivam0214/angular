@@ -2,8 +2,7 @@
   <h2>Product List</h2>
   <h3>Shop by Category</h3>
   <!-- Filter Section -->
-  <div class="filters">
-
+    <div class="filters">
     <div class="category-grid">
       <div
         class="category-item"
@@ -11,34 +10,47 @@
         (click)="filterByCategory(category)"
         [class.selected]="selectedCategory === category"
       >
-        <img src="https://dummyimage.com/100x400/072c61/fff.jpg&text={{category}}" [alt]="category" class="category-image" />
-        <p>{{ category }}</p>
+        <img
+          src="https://dummyimage.com/100x90/072c61/fff.jpg&text={{category}}"
+          [alt]="category"
+          class="category-image"
+          loading="lazy"
+        />
+        <p class="category-name">{{ category }}</p>
         <span class="badge">{{ getProductCountForCategory(category) }}</span>
       </div>
     </div>
   </div>
-<div class="row p10">
-  <select [(ngModel)]="sortOption">
-    <option value="">-- Sort By --</option>
-    <option value="priceAsc">Price: Low to High</option>
-    <option value="priceDesc">Price: High to Low</option>
-    <option value="nameAsc">Name: A-Z</option>
-    <option value="nameDesc">Name: Z-A</option>
-  </select>
-</div>
+  <div class="row p10">
+    <select >
+      <option value="">-- Sort By --</option>
+      <option value="priceAsc">Price: Low to High</option>
+      <option value="priceDesc">Price: High to Low</option>
+      <option value="nameAsc">Name: A-Z</option>
+      <option value="nameDesc">Name: Z-A</option>
+    </select>
+  </div>
   <!-- Product Grid -->
-  <div *ngIf="filteredProducts.length > 0; else noProducts" class="product-grid">
-    <div class="product" *ngFor="let product of filteredProducts | productSort:sortOption">
-      <img [src]="product.thumbnail" [alt]="product.title" class="product-thumbnail" />
+  <div *ngIf="displayedProducts.length > 0; else noProducts" class="product-grid">
+    <div class="product" *ngFor="let product of displayedProducts | productSort:sortOption">
+      <img
+        [src]="product.thumbnail"
+        [alt]="product.title"
+        class="product-thumbnail"
+        loading="lazy"
+      />
       <h3>{{ product.title }}</h3>
       <p><strong>Category:</strong> {{ product.category }}</p>
       <p><strong>Price:</strong> ${{ product.price }}</p>
       <p><strong>Rating:</strong> {{ product.rating }} / 5</p>
       <p><strong>Stock:</strong> {{ product.stock }}</p>
       <button (click)="addToCart(product)">Add to Cart</button>
-      <button [routerLink]="['/product-details', product.id]">Show Details</button>
     </div>
   </div>
+
+  <button *ngIf="displayedProducts.length < filteredProducts.length" (click)="loadMoreProducts()">
+    Load More
+  </button>
 
   <ng-template #noProducts>
     <p>No products available.</p>
