@@ -8,13 +8,13 @@
         <img [src]="item.image" alt="{{ item.name }}" />
         <div class="item-details">
           <h3>{{ item.name }}</h3>
-          <p>Price: ${{ item.price }}</p>
+          <p>Price: {{ item.price  | currency:'EUR' :true }}</p>
           <div class="quantity">
             <button (click)="decreaseQuantity(i)">-</button>
             <span>{{ item.quantity }}</span>
             <button (click)="increaseQuantity(i)">+</button>
           </div>
-          <p>Total: ${{ item.price * item.quantity }}</p>
+          <p>Total:{{ ((item.price * item.quantity).toFixed(2)) | currency:'EUR' :true }} </p>
         </div>
         <button class="remove" (click)="removeItem(i)">Remove</button>
       </div>
@@ -38,7 +38,7 @@
 
       <!-- Total Amount -->
       <div class="cart-total">
-        <h3>Total Amount: ${{ calculateTotal() - discount }}</h3>
+        <h3>Total Amount: {{ calculateTotal() - discount | currency:'EUR' :true }}</h3>
       </div>
 
       <!-- Payment Options -->
@@ -46,19 +46,19 @@
         <h3>Payment Options</h3>
         <label>
           <input type="radio" name="paymentMethod" value="creditCard"
-          
+
           />
           Credit Card
         </label>
         <label>
           <input type="radio" name="paymentMethod" value="paypal"
-          
+
           />
           PayPal
         </label>
         <label>
           <input type="radio" name="paymentMethod" value="cashOnDelivery"
-          
+
           />
           Cash on Delivery
         </label>

@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit {
   categories: string[] = [];
   selectedCategory: string = '';
   selectedRating: number = 0;
+  sortOption = '';
 
   constructor(
     private productService: ProductService,

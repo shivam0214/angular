@@ -10,13 +10,13 @@ export class AppComponent {
   title = 'demo2';
   authorized: boolean = false;
   constructor(private router: Router) {
-    console.log('AppComponent initialized');
+    //console.log('AppComponent initialized');
   }
   ngOnInit() {
 
      this.router.events.subscribe(() => {
       this.authorized = this.router.url.includes('admin');
-      console.log(`Authorized: ${this.authorized}`);
+      //console.log(`Authorized: ${this.authorized}`);
     });
   }
 }

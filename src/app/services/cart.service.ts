@@ -62,7 +62,8 @@ export class CartService {
 
   // Calculate the total price of the cart
   calculateTotal(): number {
-    return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    const total = this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return parseFloat(total.toFixed(2)); // Round to two decimal places
   }
 
   // Save cart items to local storage

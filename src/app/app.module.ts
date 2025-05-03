@@ -13,6 +13,9 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Required for Toastr
 import { ToastrModule } from 'ngx-toastr';
+import { ProductSortPipe } from './product-sort.pipe';
+import { APP_CONFIG } from './config/app-config.token';
+import { APP_CONFIG_VALUE } from './config/app-config.values';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
     FooterComponent
   ],
   imports: [
+    ProductSortPipe,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -41,7 +45,9 @@ import { ToastrModule } from 'ngx-toastr';
     })
 
   ],
-  providers: [],
+  providers: [
+    { provide: APP_CONFIG, useValue: APP_CONFIG_VALUE }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

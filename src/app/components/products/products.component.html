@@ -17,10 +17,18 @@
       </div>
     </div>
   </div>
-
+<div class="row p10">
+  <select [(ngModel)]="sortOption">
+    <option value="">-- Sort By --</option>
+    <option value="priceAsc">Price: Low to High</option>
+    <option value="priceDesc">Price: High to Low</option>
+    <option value="nameAsc">Name: A-Z</option>
+    <option value="nameDesc">Name: Z-A</option>
+  </select>
+</div>
   <!-- Product Grid -->
   <div *ngIf="filteredProducts.length > 0; else noProducts" class="product-grid">
-    <div class="product" *ngFor="let product of filteredProducts">
+    <div class="product" *ngFor="let product of filteredProducts | productSort:sortOption">
       <img [src]="product.thumbnail" [alt]="product.title" class="product-thumbnail" />
       <h3>{{ product.title }}</h3>
       <p><strong>Category:</strong> {{ product.category }}</p>

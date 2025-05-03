@@ -130,3 +130,40 @@ span.badge {
   object-fit: cover;
   border-radius: 8px;
 }
+
+
+.row.p10 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  select {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      border-color: #007bff;
+    }
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+    }
+
+    option {
+      font-size: 1rem;
+      color: #333;
+    }
+  }
+}
