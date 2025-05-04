@@ -2,8 +2,25 @@
   <h2>Product List</h2>
   <h3>Shop by Category</h3>
   <!-- Filter Section -->
-    <div class="filters">
+  <div class="filters">
     <div class="category-grid">
+      <!-- Static Category -->
+      <div
+        class="category-item"
+        (click)="filterByCategory('all')"
+        [class.selected]="selectedCategory === 'all'"
+      >
+        <img
+          loading="lazy"
+          class="category-image"
+          src="https://dummyimage.com/300x90/072c61/fff.jpg&text=All+Products"
+          alt="All Products"
+        />
+        <p class="category-name">All Products</p>
+        <span class="badge">{{ products.length }}</span>
+      </div>
+
+      <!-- Dynamic Categories -->
       <div
         class="category-item"
         *ngFor="let category of categories"
@@ -11,7 +28,7 @@
         [class.selected]="selectedCategory === category"
       >
         <img
-          src="https://dummyimage.com/100x90/072c61/fff.jpg&text={{category}}"
+          src="https://dummyimage.com/300x90/072c61/fff.jpg&text={{category}}"
           [alt]="category"
           class="category-image"
           loading="lazy"
@@ -21,8 +38,9 @@
       </div>
     </div>
   </div>
+
   <div class="row p10">
-    <select >
+    <select>
       <option value="">-- Sort By --</option>
       <option value="priceAsc">Price: Low to High</option>
       <option value="priceDesc">Price: High to Low</option>
@@ -30,9 +48,10 @@
       <option value="nameDesc">Name: Z-A</option>
     </select>
   </div>
+
   <!-- Product Grid -->
   <div *ngIf="displayedProducts.length > 0; else noProducts" class="product-grid">
-    <div class="product" *ngFor="let product of displayedProducts | productSort:sortOption">
+    <div class="product" *ngFor="let product of displayedProducts | productSort: sortOption">
       <img
         [src]="product.thumbnail"
         [alt]="product.title"

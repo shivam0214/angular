@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,HostListener, OnInit } from '@angular/core';
 import { ProductService, Product } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
@@ -33,9 +33,7 @@ export class ProductsComponent implements OnInit {
     this.productService.getProducts().subscribe((data) => {
       this.products = data;
       this.filteredProducts = data;
-      this.displayedProducts = this.filteredProducts.slice(0, this.loadMoreCount); // Load initial products
-
-      // Extract unique categories
+      this.displayedProducts = this.filteredProducts.slice(0, this.loadMoreCount);
       this.categories = [...new Set(data.map((product) => product.category))];
     });
   }
@@ -53,6 +51,8 @@ export class ProductsComponent implements OnInit {
   }
 
   loadMoreProducts(): void {
+    console.log((window.innerHeight + window.scrollY) ,"====", document.body.offsetHeight);
+
     const currentLength = this.displayedProducts.length;
     const nextProducts = this.filteredProducts.slice(
       currentLength,
@@ -82,12 +82,26 @@ export class ProductsComponent implements OnInit {
     return categoryImages[category] || 'path/to/default.jpg';
   }
 
-  filterByCategory(category: string) {
-    this.selectedCategory = this.selectedCategory === category ? '' : category;
-    this.filterProducts();
+  filterByCategory(category: string): void {
+    this.selectedCategory = category;
+    if (category === 'all') {
+      this.filteredProducts = this.products;
+    } else {
+      this.filteredProducts = this.products.filter(product => product.category === category);
+    }
+    this.displayedProducts = this.filteredProducts.slice(0, this.loadMoreCount);
   }
 
   getProductCountForCategory(category: string): number {
     return this.products.filter(product => product.category === category).length;
   }
+  @HostListener('window:scroll', [])
+onScroll(): void {
+  if ((window.innerHeight + window.scrollY+500) >= document.body.offsetHeight) {
+    // User has scrolled to the bottom of the page
+    if (this.displayedProducts.length < this.filteredProducts.length) {
+      this.loadMoreProducts();
+    }
+  }
+}
 }

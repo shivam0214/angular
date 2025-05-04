@@ -16,6 +16,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProductSortPipe } from './product-sort.pipe';
 import { APP_CONFIG } from './config/app-config.token';
 import { APP_CONFIG_VALUE } from './config/app-config.values';
+import { ContactFormComponent } from './contact-form/contact-form.component';
+import { EnquiryComponent } from './components/enquiry/enquiry.component';
+import { LoginComponent } from './login/login.component';
+//import { EmailValidatorDirective } from './components/enquiry/email-validator.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,9 +28,13 @@ import { APP_CONFIG_VALUE } from './config/app-config.values';
     ProductsComponent,
     ProductDetailsComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ContactFormComponent,
+    EnquiryComponent,
+    LoginComponent,
   ],
   imports: [
+    //EmailValidatorDirective,
     ProductSortPipe,
     BrowserModule,
     AppRoutingModule,

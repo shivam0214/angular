@@ -12,6 +12,14 @@ export class AppComponent {
   constructor(private router: Router) {
     //console.log('AppComponent initialized');
   }
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('authToken');
+  }
+
+  logout(): void {
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/login']);
+  }
   ngOnInit() {
 
      this.router.events.subscribe(() => {

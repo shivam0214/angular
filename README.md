@@ -57,3 +57,26 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+Angular offers two primary approaches to handling forms: template-driven and reactive. They differ significantly in how they are defined, managed, and used.
+
+1)Template-Driven Forms
+- Definition: Defined primarily in the HTML template using directives like ngModel.
+- Data Handling: Employs two-way data binding with ngModel to synchronize data between the template and the component.
+- Logic Location: Form logic and validation are mostly handled within the template.
+- Asynchronous Nature: Template-driven forms operate asynchronously.
+- Simplicity: Suitable for simple forms with minimal validation requirements.
+- Module: Uses FormsModule.
+- Testing: Testing can be more challenging due to the asynchronous nature and reliance on the template.
+
+
+2) Reactive Forms
+- Definition: Defined programmatically in the component class using FormGroup and FormControl.
+- Data Handling: Manages data flow synchronously using observable streams.
+- Logic Location: Form logic, validation, and data manipulation are centralized in the component class.
+- Synchronous Nature: Reactive forms operate synchronously.
+- Scalability: Well-suited for complex and dynamic forms. Dynamic forms creation based on the inputs
+Module: Uses ReactiveFormsModule.
+Testing: Easier to test due to the synchronous nature and separation of concerns.
+- It is having the defined Validators to define the validations for various Formcontrol elements

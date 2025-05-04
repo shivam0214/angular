@@ -7,26 +7,29 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { CartComponent } from './components/cart/cart.component';
 import { AddProductComponent } from './admin/pages/add-product/add-product.component';
 import { ListProductsComponent } from './admin/pages/list-products/list-products.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
+import { EnquiryComponent } from './components/enquiry/enquiry.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
+
 const routes: Routes = [
-  /* {
-    path: 'admin',
-    loadChildren: () => import('./admin/AdminRoutingModule').then(m => m.AdminRoutingModule)
-  }, */
+
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) // Lazy load AdminModule
   },
+  { path: 'login', component:LoginComponent },
+  { path: 'enquiry', component:EnquiryComponent},
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'products', component: ProductsComponent },
+  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
   { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
- // { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
+  { path: 'contact', component:ContactFormComponent},
   { path: '**', component: HomeComponent },
-  /* { path: 'admin/add-product', component: AddProductComponent },
-  { path: 'admin/list-products', component: ListProductsComponent }, */
-  // Wildcard route for a 404 page
+
+
 ];
 
 @NgModule({

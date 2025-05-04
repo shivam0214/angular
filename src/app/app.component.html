@@ -3,7 +3,7 @@
   <router-outlet></router-outlet>
   <app-footer></app-footer>
 </div>
-
+<button *ngIf="isAuthenticated()" (click)="logout()">Logout</button>
 <div *ngIf="authorized">
   <router-outlet></router-outlet>
 </div>

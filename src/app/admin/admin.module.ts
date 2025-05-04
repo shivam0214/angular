@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AdminRoutingModule } from './AdminRoutingModule';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -23,7 +24,7 @@ import { EditProductComponent } from './pages/edit-product/edit-product.componen
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
+   // ReactiveFormsModule,
     AdminRoutingModule
   ]
 })
