@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
+  { path: 'products', component: ProductsComponent, }, //canActivate: [AuthGuard] 
   { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'contact', component:ContactFormComponent},
