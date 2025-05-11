@@ -10,6 +10,12 @@ import { ProductService } from '../../../services/product.service';
 
 })
 export class AddProductComponent implements OnInit {
+onThumbnailSelect($event: Event) {
+throw new Error('Method not implemented.');
+}
+onImageSelect($event: Event) {
+throw new Error('Method not implemented.');
+}
   addProductForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private productService: ProductService) {}

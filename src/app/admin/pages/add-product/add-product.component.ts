@@ -1,39 +1,67 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ProductService } from '../../../services/product.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss'],
-  standalone: false,
-
+  standalone: false
 })
 export class AddProductComponent implements OnInit {
-  addProductForm!: FormGroup;
+  productForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private productService: ProductService) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.addProductForm = this.fb.group({
+    this.productForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       category: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0)]],
-      stock: [0, [Validators.required, Validators.min(0)]],
-      thumbnail: ['']
+      discountPercentage: [0],
+      rating: [0, [Validators.min(0), Validators.max(5)]],
+      stock: [0, Validators.required],
+      tags: [''],
+      brand: [''],
+      sku: [''],
+     // weight: [0],
+      dimensions: this.fb.group({
+        width: [0],
+        height: [0],
+        depth: [0]
+      }),
+      warrantyInformation: [''],
+      shippingInformation: [''],
+      availabilityStatus: [''],
+      returnPolicy: [''],
+      minimumOrderQuantity: [1],
+      images: [[]],
+      thumbnail: [''],
+      createdBy: "1" // Assuming a default user ID for the creator
     });
   }
 
-  addProduct(): void {
-    if (this.addProductForm.valid) {
-      const product = this.addProductForm.value;
-      this.productService.addProduct(product).subscribe(() => {
-        alert('Product added successfully!');
-        this.addProductForm.reset(); // Reset the form after submission
-      });
+  onImageSelect(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      const files = Array.from(input.files).map(file => URL.createObjectURL(file));
+      this.productForm.patchValue({ images: files });
+    }
+  }
+
+  onThumbnailSelect(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const thumbnail = URL.createObjectURL(input.files[0]);
+      this.productForm.patchValue({ thumbnail });
+    }
+  }
+
+  onSubmit(): void {
+    if (this.productForm.valid) {
+      console.log('Product Data:', this.productForm.value);
     } else {
-      alert('Please fill out all required fields.');
+      console.log('Form is invalid');
     }
   }
 }

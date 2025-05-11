@@ -25,7 +25,7 @@ export class EditProductComponent implements OnInit {
     console.log(this.productId)
 
     this.productService.getProducts().subscribe((products) => {
-      const product = products.find((p) => p.id === this.productId);
+      const product = products.find((p) => p._id === this.productId);
       if (product) {
         this.initializeForm(product);
       }

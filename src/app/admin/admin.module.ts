@@ -24,7 +24,7 @@ import { EditProductComponent } from './pages/edit-product/edit-product.componen
   imports: [
     CommonModule,
     FormsModule,
-   // ReactiveFormsModule,
+    ReactiveFormsModule,
     AdminRoutingModule
   ]
 })

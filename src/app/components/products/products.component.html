@@ -64,6 +64,7 @@
       <p><strong>Rating:</strong> {{ product.rating }} / 5</p>
       <p><strong>Stock:</strong> {{ product.stock }}</p>
       <button (click)="addToCart(product)">Add to Cart</button>
+      <button [routerLink]="['/product-details', product._id]">Show Details</button>
     </div>
   </div>
 

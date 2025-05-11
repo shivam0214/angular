@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { APP_CONFIG } from '../config/app-config.token';
 import { AppConfig } from '../app-config';
+import { map } from 'rxjs/operators';
 export interface Product {
-  id: number;
+  _id: number;
   title: string;
   description: string;
   category: string;
@@ -41,6 +42,7 @@ export interface Product {
   };
   images: string[];
   thumbnail: string;
+  createdBy: number;
 }
 
 @Injectable({
@@ -58,9 +60,11 @@ export class ProductService {
   }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+    return this.http.get<{ products: Product[] }>(this.apiUrl, { params: { _sort: 'id', _order: 'asc' } })
+      .pipe(
+        map(response => response.products) // Extract the 'products' array from the response
+      );
   }
-
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.apiUrl, product);
   }

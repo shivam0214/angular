@@ -24,7 +24,7 @@ export class ListProductsComponent implements OnInit {
   }
   editProduct(product: Product): void {
     console.log('Editing product:', product);
-    this.router.navigate(['/admin/edit-product', product.id]); // Navigate to EditProductComponent
+    this.router.navigate(['/admin/edit-product', product._id]); // Navigate to EditProductComponent
   }
 
   deleteProduct(product: any): void {

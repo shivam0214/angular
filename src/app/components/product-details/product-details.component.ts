@@ -28,8 +28,8 @@ export class ProductDetailsComponent implements OnInit {
 
     if (productId) {
       this.productService.getProducts().subscribe((products) => {
-        this.product = products.find((p) => p.id === +productId) || null;
-        this.product = products.find((p) => p.id.toString() === productId) || null;
+        this.product = products.find((p) => p._id === +productId) || null;
+        this.product = products.find((p) => p._id.toString() === productId) || null;
 
         this.isLoading = false; // Set loading to false after data is fetched
       });
@@ -37,7 +37,7 @@ export class ProductDetailsComponent implements OnInit {
   }
   addToCart(product: Product): void {
     this.cartService.addToCart({
-      id: product.id,
+      id: product._id,
       name: product.title, // Use 'title' from the Product interface
       price: product.price,
       quantity: 1,

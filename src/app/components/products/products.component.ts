@@ -17,7 +17,7 @@ export class ProductsComponent implements OnInit {
   selectedCategory: string = '';
   selectedRating: number = 0;
   sortOption = '';
-  loadMoreCount: number = 10; // Number of products to load at a time
+  loadMoreCount: number = 3; // Number of products to load at a time
 
   constructor(
     private productService: ProductService,
@@ -51,7 +51,6 @@ export class ProductsComponent implements OnInit {
   }
 
   loadMoreProducts(): void {
-    console.log((window.innerHeight + window.scrollY) ,"====", document.body.offsetHeight);
 
     const currentLength = this.displayedProducts.length;
     const nextProducts = this.filteredProducts.slice(
@@ -63,7 +62,7 @@ export class ProductsComponent implements OnInit {
 
   addToCart(product: Product): void {
     this.cartService.addToCart({
-      id: product.id,
+      id: product._id,
       name: product.title,
       price: product.price,
       quantity: 1,

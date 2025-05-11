@@ -1,25 +1,118 @@
-<!-- <div class="add-product">
-  <h2>Add Product</h2>
-  <form [formGroup]="addProductForm" (ngSubmit)="addProduct()">
-    <label for="title">Title:</label>
-    <input type="text" id="title" formControlName="title" required />
+<div class="product-form">
+  <h2>Add or Edit Product</h2>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" formControlName="title" />
+      </div>
 
-    <label for="description">Description:</label>
-    <textarea id="description" formControlName="description" required></textarea>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <input type="text" id="category" formControlName="category" />
+      </div>
+    </div>
 
-    <label for="category">Category:</label>
-    <input type="text" id="category" formControlName="category" required />
+    <div class="form-row">
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" id="price" formControlName="price" />
+      </div>
 
-    <label for="price">Price:</label>
-    <input type="number" id="price" formControlName="price" required />
+      <div class="form-group">
+        <label for="discountPercentage">Discount Percentage</label>
+        <input type="number" id="discountPercentage" formControlName="discountPercentage" />
+      </div>
+    </div>
 
-    <label for="stock">Stock:</label>
-    <input type="number" id="stock" formControlName="stock" required />
+    <div class="form-row">
+      <div class="form-group">
+        <label for="stock">Stock</label>
+        <input type="number" id="stock" formControlName="stock" />
+      </div>
 
-    <label for="thumbnail">Thumbnail URL:</label>
-    <input type="text" id="thumbnail" formControlName="thumbnail" />
+      <div class="form-group">
+        <label for="tags">Tags</label>
+        <input type="text" id="tags" formControlName="tags" placeholder="Comma-separated tags" />
+      </div>
+    </div>
 
-    <button type="submit" [disabled]="addProductForm.invalid">Add Product</button>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="brand">Brand</label>
+        <input type="text" id="brand" formControlName="brand" />
+      </div>
+
+      <div class="form-group">
+        <label for="sku">SKU</label>
+        <input type="text" id="sku" formControlName="sku" />
+      </div>
+    </div>
+
+    <div class="form-row">
+     <!--  <div class="form-group">
+        <label for="weight">Weight</label>
+        <input type="number" id="weight" formControlName="weight" step="0.1" />
+      </div> -->
+
+     <!--  <div class="form-group">
+        <label for="dimensions">Dimensions</label>
+        <input type="number" id="width" formControlName="dimensions.width" placeholder="Width" />
+        <input type="number" id="height" formControlName="dimensions.height" placeholder="Height" />
+        <input type="number" id="depth" formControlName="dimensions.depth" placeholder="Depth" />
+      </div> -->
+      <div class="form-group" formGroupName="dimensions">
+        <label for="dimensions">Dimensions</label>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="width">Width</label>
+            <input type="number" id="width" formControlName="width" placeholder="Width" />
+          </div>
+          <div class="form-group">
+            <label for="height">Height</label>
+            <input type="number" id="height" formControlName="height" placeholder="Height" />
+          </div>
+          <div class="form-group">
+            <label for="depth">Depth</label>
+            <input type="number" id="depth" formControlName="depth" placeholder="Depth" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group full-width">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description"></textarea>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group full-width">
+        <label for="warrantyInformation">Warranty Information</label>
+        <textarea id="warrantyInformation" formControlName="warrantyInformation"></textarea>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group full-width">
+        <label for="shippingInformation">Shipping Information</label>
+        <textarea id="shippingInformation" formControlName="shippingInformation"></textarea>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="images">Images</label>
+        <input type="file" id="images" (change)="onImageSelect($event)" multiple />
+      </div>
+
+      <div class="form-group">
+        <label for="thumbnail">Thumbnail</label>
+        <input type="file" id="thumbnail" (change)="onThumbnailSelect($event)" />
+      </div>
+    </div>
+
+    <button type="submit">Save Product</button>
   </form>
 </div>
- -->
