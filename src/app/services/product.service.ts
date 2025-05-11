@@ -69,11 +69,17 @@ export class ProductService {
     return this.http.post<Product>(this.apiUrl, product);
   }
 
-  updateProduct(id: number, product: Product): Observable<Product> {
+  updateProduct(id: any, product: Product): Observable<Product> {
     return this.http.put<Product>(`${this.apiUrl}/${id}`, product);
   }
 
   deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  getProductByid(id: string): Observable<Product> {
+    return this.http.get<{ product: Product }>(`${this.apiUrl}/${id}`).pipe(
+      map(response => response.product) // Extract the 'product' property from the response
+    );
   }
 }

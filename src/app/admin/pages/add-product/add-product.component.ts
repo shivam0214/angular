@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProductService } from '../../../services/product.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-product',
@@ -10,7 +12,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddProductComponent implements OnInit {
   productForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+    private productService: ProductService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -24,7 +29,7 @@ export class AddProductComponent implements OnInit {
       tags: [''],
       brand: [''],
       sku: [''],
-     // weight: [0],
+      weight: [0],
       dimensions: this.fb.group({
         width: [0],
         height: [0],
@@ -59,7 +64,15 @@ export class AddProductComponent implements OnInit {
 
   onSubmit(): void {
     if (this.productForm.valid) {
-      console.log('Product Data:', this.productForm.value);
+      this.productService.addProduct(this.productForm.value).subscribe((response) => {
+        this.toastr.success('Product added successfully!', 'Success');
+        this.productForm.reset();
+      }, (error) => {
+        this.toastr.error('Failed to add product', 'Error');
+      });
+
+       // Spread operator to include all form values
+
     } else {
       console.log('Form is invalid');
     }
