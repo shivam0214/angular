@@ -14,7 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductDetailsComponent implements OnInit {
   product: Product | null = null; // Initialize as null
   isLoading: boolean = true; // Add a loading state
-
+  selectedImage: string | null = null;
+  zoomEnabled: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +36,18 @@ export class ProductDetailsComponent implements OnInit {
       });
     }
   }
+
+  selectImage(image: string): void {
+    this.selectedImage = image;
+  }
+  enableZoom(): void {
+    this.zoomEnabled = true;
+  }
+
+  disableZoom(): void {
+    this.zoomEnabled = false;
+  }
+
   addToCart(product: Product): void {
     this.cartService.addToCart({
       id: product._id,

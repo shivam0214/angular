@@ -40,3 +40,53 @@
     }
   }
 }
+/* filepath: d:\sts java\angular\demo2\src\app\components\product-details\product-details.component.scss */
+.carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .main-image {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+
+    .zoom-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      cursor: zoom-in;
+
+      &.zoom {
+        transform: scale(1.5);
+        cursor: zoom-out;
+      }
+    }
+  }
+
+  .image-list {
+    display: flex;
+    gap: 10px;
+
+    .thumbnail {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+
+      &.selected {
+        border-color: #007bff;
+      }
+
+      &:hover {
+        border-color: #007bff;
+      }
+    }
+  }
+}

@@ -1,18 +1,41 @@
 <div class="product-details" *ngIf="!isLoading; else loading">
   <h2>{{ product?.title }}</h2>
-  <img [src]="product?.thumbnail" [alt]="product?.title" />
+
+  <!-- Carousel Section -->
+  <div class="carousel">
+    <!-- Main Image with Zoom Effect -->
+    <div class="main-image" (mouseenter)="enableZoom()" (mouseleave)="disableZoom()">
+      <img
+        [src]="selectedImage || product?.thumbnail"
+        [alt]="product?.title"
+        [class.zoom]="zoomEnabled"
+        class="zoom-image"
+      />
+    </div>
+
+    <!-- Thumbnail List -->
+    <div class="image-list">
+      <img
+        *ngFor="let image of product?.images"
+        [src]="image"
+        [alt]="product?.title"
+        (click)="selectImage(image)"
+        [class.selected]="image === selectedImage"
+        class="thumbnail"
+      />
+    </div>
+  </div>
+
+  <!-- Product Details -->
   <p><strong>Category:</strong> {{ product?.category }}</p>
   <p><strong>Price:</strong> ${{ product?.price }}</p>
   <p><strong>Description:</strong> {{ product?.description }}</p>
   <p><strong>Rating:</strong> {{ product?.rating }} / 5</p>
   <p><strong>Stock:</strong> {{ product?.stock }}</p>
   <button (click)="product && addToCart(product)">Add to Cart</button>
-<button routerLink="/list-products">Back to Products</button>
+  <button routerLink="/list-products">Back to Products</button>
 </div>
 
 <ng-template #loading>
   <p>Loading product details...</p>
 </ng-template>
-
-
-
